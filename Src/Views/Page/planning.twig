@@ -1,0 +1,110 @@
+{% extends "layout.twig" %}
+{% block content %}
+
+<div class="bg-info px-5 d-flex justify-content-start" style="height: 100px;">
+    <img src="data:image/jpeg;base64,{{cinema.logo}}" style="height: 100px; object-fit: contain;"   class=" img-responsive  rounded-circle" alt="">
+    <h4 class="px-5 pt-4" > {{cinema.nom_cinema}}</h4>
+</div>
+
+
+
+  <form action="" method="POST">
+    <div id="container" >
+          <div class="row align-items-center mt-3" id="original">
+            <div class="col-sm-3 my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Nom du Film</label>
+              </div>
+                <select class="custom-select choixFilm" name ="nomFilm[]">
+                {% for film in films %}
+                  <option value="{{film.slug_movie}}">{{film.titre}}</option>
+                {% endfor %}
+                  
+                </select>
+            </div>
+            <div class="col-sm-3 my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Nom Salle</label>
+              </div>
+                <select class="custom-select choixSalle"  name="nomSalle[]">
+                {% for salle in salles %}
+                  <option value="{{salle.slug_salle}}" {% if diff.id_salle == salle.id_salle %} selected{% endif %} > {{salle.nom_salle}} </option>
+                {% endfor %}
+                  
+                </select>
+            </div>
+            <div class="col-sm-auto my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Langue</label>
+              </div>
+                <select class="custom-select langue" name="langue[]">
+                  <option value="VO" {% if diff.langue == "VO" %}selected{% endif %}>VO</option>
+                  <option value="VOSTFR" {% if diff.langue == "VOSTFR" %}selected{% endif %}>VOSTFR</option>
+                  <option value="FR" {% if diff.langue == "FR" %}selected{% endif %}>FR</option>
+                  <option value="ANGLAIS" {% if diff.langue == "ANGLAIS" %}selected{% endif %}>ANGLAIS</option>
+                </select>
+            </div>
+            <div class="col-sm-auto my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Qualité</label>
+              </div>
+                <select class="custom-select qualite" name="qualite[]">
+                  <option value="2D" {% if diff.Qualite == "2D" %}selected{% endif %}>2D</option>
+                  <option value="3D" {% if diff.Qualite == "3D" %}selected{% endif %}>3D</option>
+                </select>
+            </div>
+            <div class="col-sm-auto my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Jour</label>
+              </div>
+              <input type="date" value='{{diff.Jour}}' required class="form-control jour" name="Jour[]" >
+            </div>
+            
+            <div class="col-sm-auto my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Public autorisé</label>
+              </div>
+                <select class="custom-select jour" name="public[]">
+                  <option value="Grand public" selected>Grand public</option>
+                  <option value="-12" {% if diff.public == "-12" %}selected{% endif %}>-12</option>
+                  <option value="-16" {% if diff.public == "-16" %}selected{% endif %}>-16</option>
+                </select>
+            </div>
+            <div class="col-sm-auto my-1 input-group pt-4" style="width: auto;">
+              <div class="input-group-prepend">
+                <label class="input-group-text" >Status</label>
+              </div>
+                <select class="custom-select jour" name="status[]">
+                  <option value="Standard" {% if diff.Status == "Standard" %}selected{% endif %}>Standard</option>
+                  <option value="Premiére" {% if diff.Status == "Premiére" %}selected{% endif %}>Premiére</option>
+                  <option value="Tarif Réduit" {% if diff.Status == "Tarif Réduit" %}selected{% endif %}>Tarif Réduit</option>
+                </select>
+            </div>
+              <div class="col-auto my-1">
+                  <label>heure de Debut </label> 
+                  <input type="time" {% if diff %} value="{{diff.Debut}}"{% endif %} required class="form-control debut" name="debut[]" >
+              </div>
+              {% if not diff %}
+              <div class="col-auto my-1">
+                <span class="btn btn-danger supprimer"  > x Supprimer </span>
+              </div>
+              {% endif %}
+              
+              
+        </div>
+    </div>
+    {% if not diff %}
+    <div id="mesBouttons">
+          <span class="btn btn-secondary "  id="ajout"> + Rajouter </span>
+        </div>
+    {% endif %}
+    
+        
+      </span>
+    <div class="text-center mt-4">
+        <input type="submit" class="btn btn-primary" value="Enrégistrer">
+    </div>
+  </form>
+<script src="../../app_cine.js"></script>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+{% block content %}
+
+<div class="alert alert-info ">
+  <blockquote class="blockquote text-center .bg-secondary">
+    <p class="mb-0">Merci de bien choisir votre cinéma</p>
+  </blockquote>
+</div>
+<main role="main">  
+  <div class="container bg-light "  >
+    <div class="row d-flex justify-content-between align-items-center">
+    {% for cinema in cinemas %}
+    
+      <div class="col-md-5 bg-white " >
+        <div class="card mb-4 box-shadow">
+            <img class="card-img-top img-responsive border border-info rounded-circle" style="object-fit: cover;"  src="data:image/jpeg;base64,{{cinema.logo}}"  alt="Card image cap">
+        </div>
+        <div class="card-body ">
+              <div class="d-flex justify-content-between align-items-center">
+                  <strong class="float-left" >Nom du cinema</strong>             
+                  <p class="float-right">{{cinema.nom_cinema}}</p>
+              </div>
+              <div class=" d-flex justify-content-between align-items-center">
+                <button type="button" onclick="window.location.href='{{path_for("agenda.cinema",{"slugCinema":cinema.slug_cinema})}}' " class="btn btn-primary ">Consulter  agenda</button>
+                <button type="button" onclick="window.location.href='{{path_for("planning.cinema",{"slugCinema":cinema.slug_cinema})}}' " class="btn btn-primary  ">faire un planning</button>
+              </div>
+          </div>
+      </div>
+
+    {% endfor %}
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}

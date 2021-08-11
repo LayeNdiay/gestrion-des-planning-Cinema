@@ -1,0 +1,43 @@
+{% extends "layout.twig" %}
+{% block content %}
+<div class="bg-info px-5 d-flex justify-content-start" style="height: 100px;">
+    <img src="data:image/jpeg;base64,{{cinema.logo}}" style="height: 100px; object-fit: contain;"   class=" img-responsive  rounded-circle" alt="">
+    <h4 class="px-5 pt-4" > {{cinema.nom_cinema}}</h4>
+</div>
+{% if films %}
+<div class=" container d-flex justify-content-start flex-wrap my-4">
+  {% for film  in films %}
+    <div class="me-3 ms-3">
+      <div class="bg-warning text-center " style="font-size: 30px; height: 75px;width: 275px;box-shadow: black;"> {{diffusion[loop.index -1]["Debut"]}}</div>
+      <div class="card-body bg-secondary d-flex justify-content-start  " style="width: 250px;">
+        <div >
+          <img class=" img-responsive " style="object-fit: contain;"  src="data:image/jpeg;base64,{{film.photo}}" height="120px" width="100px" alt="Card image cap">
+        </div>
+        <div class="card-text ms-2" style="color: white;">
+                <div> {{film.titre}}</div>
+                <div> {{salle[loop.index -1]["nom_salle"]}}</div>
+                <div> {{diffusion[loop.index -1]["Qualite"]}}</div>
+                <div> {{diffusion[loop.index -1]["langue"]}}</div>
+                <div> {{diffusion[loop.index -1]["public"]}}</div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+ <div class="alert alert-danger text-center">
+        <h1>Aucun planning pour aujourd'hui</h1>
+ </div>
+ <p class="text-center" style="width:100%">Cliquez sur ce boutton pour ajouter un nouveau planning
+    <button type="button" onclick="window.location.href='{{path_for("planning")}}?id={{id}}' " class="btn btn-primary ">Modifier</button>
+  </p>
+
+
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

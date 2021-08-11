@@ -1,0 +1,92 @@
+{% extends "layout.twig" %}
+{% block content %}
+    
+
+{% for item in pdo %}
+<div class="row">
+    <div class="col-md-6">
+        <img class="card-img-top img-responsive " style="object-fit: cover;"  src="data:image/jpeg;base64,{{item.photo}}" alt="Card image cap">
+
+      </div>
+      <div class="col-md-6">
+      <form action="" method="post" class="container align-items-center" >
+    <div class="row ">
+    {% if old %}
+      <div class="alert alert-danger">
+      Modification incorrect veillez recommencer
+    </div>
+    {% endif %}
+    
+        <div class="form-group">
+            <label for="titreFilm " >Titre du film </label> <span class="asterisk"> * </span>
+            <input type="text" value="{{item.titre}}"class="form-control {% if  flash.titreFilm %} is-invalid {% endif %}" name="titreFilm" id="titreFilm">
+             {% if  flash.titreFilm %}
+                <div  class="invalid-feedback">
+                    {{flash.titreFilm}}
+                </div>
+           {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="lienYoutuber">lien vers youtube </label>
+            <input type="url" value="{{item.lien_youtube}}" class="form-control " name="lienYoutuber" id="lienYoutuber">
+        </div>
+        <div class="">
+            <label for="lienTeaser">lien vers teaser </label>
+            <input type="text" value="{{item.lien_teaser}}" class="form-control " name="lienTeaser" id="lienTeaser">
+        </div>
+        <div class="form-group">
+            <label for="dateSortie">date de sortie </label> <span class="asterisk"> * </span>
+            <input type="date" value="{{item.date_sortie}}" class="form-control {% if  flash.dateSortie %} is-invalid {% endif %}" name="dateSortie" id="dateSortie">
+             {% if  flash.dateSortie %}
+                <div  class="invalid-feedback">
+                    {{flash.dateSortie}}
+                </div>
+           {% endif %}
+        </div>
+    </div>
+        <div class="form-group">
+            <label for="sysnopsis">sysnopsis</label>
+            <input type="text" value="{{item.synopsis}}" class="form-control " name="sysnopsis" id="sysnopsis">
+        </div>
+        <div class="form-group">
+            <label for="durre">durée du film </label> <span class="asterisk"> * </span>
+            <input type="time" value="{{item.durre}}" class="form-control {% if  flash.durre %} is-invalid {% endif %}" name="durre" id="durre">
+             {% if  flash.durre %}
+                <div  class="invalid-feedback">
+                    {{flash.durre}}
+                </div>
+           {% endif %}
+        </div>
+
+    <div class="form-group ">
+        <label for="testInput">Catégorie </label> <span class="asterisk"> * </span>
+        <input type="text" value="{{categorie[item.titre]}}" id="testInput" class="form-control {% if  flash.categorie %} is-invalid {% endif %}"  name="categorie"/>
+         {% if  flash.categorie %}
+                <div  class="invalid-feedback">
+                    {{flash.categorie}}
+                </div>
+           {% endif %}
+    </div>
+    <div class="form-group">
+        <label for="description">Desciption </label><span class="asterisk"> * </span>
+        <textarea name="description"  class="form-control {% if  flash.description %} is-invalid {% endif %}" id="description" rows="3" >{{item.description}}</textarea>
+         {% if  flash.description %}
+                <div  class="invalid-feedback">
+                    {{flash.description}}
+                </div>
+           {% endif %}
+    </div>
+    <div class="center form-group mt-4 mb-5  ">
+      <label for=""></label>
+      <input type="submit" name="" id="" class="btn btn-primary" value="enregistrer">
+    </div>
+
+</form>
+      </div>
+
+
+
+</div>
+{% endfor %}
+{% endblock %}

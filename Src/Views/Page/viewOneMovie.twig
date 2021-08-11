@@ -1,0 +1,74 @@
+{% extends "layout.twig" %}
+{% block content %}
+    
+
+{% for item in pdo %}
+   {% if old %}
+  <div class="alert alert-success">
+          Modification effectuer avec succés
+        </div>
+  {% endif %}
+<div class="row">
+
+      
+    <div class="col-md-6">
+        <img class="card-img-top img-responsive " style="object-fit: cover;"  src="data:image/jpeg;base64,{{item.photo}}" alt="Card image cap">
+
+      </div>
+     
+      <div class="col-md-6 text-right">
+        <div class="d-flex justify-content-center px-5 mt-5">
+          <strong>Titre</strong>
+          <p class="mx-5"> {{item.titre}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>Slug</strong>
+          <p class="mx-5"> {{item.slug_movie}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5">
+          <strong>Durée</strong>
+          <p class="mx-5"> {{item.durre}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5">
+          <strong>Date de sortie</strong>
+          <p class="mx-5"> {{item.date_sortie}}</p>
+        </div>
+
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>catégorie(s)</strong>
+          <p class="mx-5">  {{categorie[item.titre]}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>lien vers youtube</strong>
+          <p class="mx-5">  {{item.lien_youtube}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5">
+          <strong>Lien du teaser</strong>
+          <p class="mx-5"> {{item.lien_teaser}}</p>
+        </div>
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>Creer le</strong>
+          <p class="mx-5"> {{item.created_At}}</p>
+        </div>
+        {% if  item.updated_At %}
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>Modifier le</strong>
+          <p class="mx-5"> {{item.updated_At}}</p>
+        </div>
+        {% endif %}
+        
+        
+        <div class="d-flex justify-content-center px-5 ">
+          <strong>Description</strong>
+          <p class="mx-5"> {{item.description}}</p>
+        </div>
+      <div class="d-flex justify-content-center px-5 ">
+       <button type="button" onclick="window.location.href='{{path_for("edit.slug",{"slug":item.slug_movie}) }}' " class="btn btn-primary btn-outline-dark">Modifier</button>
+
+        </div>
+      </div>
+
+</div>
+  
+{% endfor %}
+{% endblock %}

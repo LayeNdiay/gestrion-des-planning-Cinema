@@ -1,0 +1,32 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <main role="main">  
+          <div class="container py-5 bg-light">
+    
+            <div class="row">
+             {% for  resultat in pdo %}
+              <div class="col-md-4 "  >
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top img-responsive " style="object-fit: contain;"  src="data:image/jpeg;base64,{{resultat.photo}}" height="200px" alt="Card image cap">
+                  <div class="card-body">
+  <pre><strong>titre</strong>             {{resultat.titre}}</pre>
+  <pre><strong>lien vers youtube</strong>        <a href="{{resultat.lien_youtube}}">bande annonce</a></pre>
+  <pre><strong>lien du teaser</strong>              <a href="{{resultat.lien_teaser}}">teaser</a></pre>
+  <pre><strong>date de sortie</strong>              {{resultat.date_sortie}}</pre>
+  <pre><strong>categorie(s)</strong>   {{categorie[resultat.titre]}}</pre>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" onclick="window.location.href='{{path_for("edit.slug",{"slug":resultat.slug_movie})}}' " class="btn btn-sm btn-outline-secondary">Modifier</button>
+                        <button type="button" onclick="window.location.href='{{path_for("view.slug",{"slug":resultat.slug_movie})}}' " class="btn btn-sm btn-outline-secondary">Voir</button>
+                      </div>
+                      <small class="text-muted"><strong>durrée</strong>  {{resultat.durre}}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+      </main>
+{% endblock %}

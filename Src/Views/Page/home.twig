@@ -1,0 +1,107 @@
+{% extends "layout.twig" %}
+{% block content %}
+
+
+{% if flash.success %}
+<div class="alert alert-success">
+      {{flash.success}}
+   </div>
+{% endif %}
+{% if flash.error %}
+    <div class="alert alert-danger">
+      {{flash.error}}
+   </div>
+
+{% endif %}
+
+
+
+
+<div class=" alert alert-info" >
+    <blockquote class="blockquote text-center .bg-secondary">
+         les champs avec  <span class="asterisk"> * </span> sont obligatoires
+   </blockquote>
+</div>
+<form action="" method="post" class="container align-items-center" enctype="multipart/form-data">
+    <div class="row alim-items-center mt-3 ">
+    <div class="drag-area form-group files color col-sm-3 my-1">
+            <label for="photo">photo du film</label> <span class="asterisk"> * </span>
+            <input id="photo" required name="photo" accept="image/*" class="titreFilms {% if  flash.photo %} is-invalid {% endif %}"  type="file" multiplename="photo"label="glissez la photo du  film " help="glisser votre fichier pour le visualiser" is="drop-files"/>
+           {% if  flash.photo %}
+                <div  class="invalid-feedback">
+                    {{flash.photo}}
+                </div>
+           {% endif %}
+          
+        </div>
+        <div class="mt-3 col-auto my-1 ">
+            <label for="titreFilm " >Titre du film </label> <span class="asterisk"> * </span>
+            <input type="text" value="{{old.titreFilm}}"class="form-control {% if  flash.titreFilm %} is-invalid {% endif %}" name="titreFilm" id="titreFilm">
+             {% if  flash.titreFilm %}
+                <div  class="invalid-feedback">
+                    {{flash.titreFilm}}
+                </div>
+           {% endif %}
+        </div>
+        
+    </div>
+    <div class="row align-items-center mt-3">
+        <div class="col-sm-3 my-1">
+            <label for="lienYoutuber">lien vers youtube </label>
+            <input type="url" value="{{old.lienYoutuber}}" class="form-control " name="lienYoutuber" id="lienYoutuber">
+        </div>
+        <div class="col-sm-3 my-1">
+            <label for="lienTeaser"> Teaser </label>
+            <input type="file" accept="video/mp4" class="form-control " name="lienTeaser" id="lienTeaser">
+        </div>
+    </div>
+    <div class="row align-items-center mt-3">
+        <div class="col-sm-3 my-1">
+            <label for="durre">durée du film </label> <span class="asterisk"> * </span>
+            <input type="time" value="{{old.durre}}" class="form-control {% if  flash.durre %} is-invalid {% endif %}" name="durre" id="durre">
+             {% if  flash.durre %}
+                <div  class="invalid-feedback">
+                    {{flash.durre}}
+                </div>
+           {% endif %}
+        </div>
+        
+        <div class="col-auto my-1">
+            <label for="dateSortie">date de sortie </label> <span class="asterisk"> * </span>
+            <input type="date" value="{{old.dateSortie}}" class="form-control {% if  flash.dateSortie %} is-invalid {% endif %}" name="dateSortie" id="dateSortie">
+             {% if  flash.dateSortie %}
+                <div  class="invalid-feedback">
+                    {{flash.dateSortie}}
+                </div>
+           {% endif %}
+        </div>
+        
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="testInput">Catégorie </label> <span class="asterisk"> * </span>
+        <input type="text" value="{{old.categorie|join('')}}" id="testInput" class="form-control {% if  flash.categorie %} is-invalid {% endif %}"  name="categorie"/>
+         {% if  flash.categorie %}
+                <div  class="invalid-feedback">
+                    {{flash.categorie}}
+                </div>
+           {% endif %}
+    </div>
+    <div class="col-auto my-1  ">
+        <label for="description">Desciption </label><span class="asterisk"> * </span>
+        <textarea name="description"  class="form-control {% if  flash.description %} is-invalid {% endif %}" id="description" rows="3" >{{old.description}}</textarea>
+         {% if  flash.description %}
+                <div  class="invalid-feedback">
+                    {{flash.description}}
+                </div>
+           {% endif %}
+    </div>
+    <div class="center form-group mt-4 mb-5  ">
+      <label for=""></label>
+      <input type="submit" name="" id="" class="btn btn-primary" value="enregistrer">
+    </div>
+
+</form>
+
+
+{% endblock %}

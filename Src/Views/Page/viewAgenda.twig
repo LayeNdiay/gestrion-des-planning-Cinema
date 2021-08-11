@@ -1,0 +1,206 @@
+{% extends "layout.twig" %}
+{% block content %}
+<div class="bg-info px-5 d-flex justify-content-start" style="height: 100px;">
+    <img src="data:image/jpeg;base64,{{cinema.logo}}" style="height: 100px; object-fit: contain;"   class=" img-responsive  rounded-circle" alt="">
+    <h4 class="px-5 pt-4" > {{cinema.nom_cinema}}</h4>
+</div>
+  <style>
+    td{
+      width: 100px;
+    }
+    th{
+      width: 200px;
+    }
+  </style>
+<div class="container mt-4">
+  <table class="table table-responsive table-striped table-warning table-bordered" >
+    <thead class="table-dark">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Mardi</th>
+        <th scope="col">Mercredi</th>
+        <th scope="col">Jeudi</th>
+        <th scope="col">Vendredi</th>
+        <th scope="col">Samedi</th>
+        <th scope="col">Dimanche</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for film in films %}
+      
+      <tr>
+        <th scope="row">
+          <div class="d-flex align-items-center flex-column">
+             <img src="data:image/jpeg;base64,{{film.photo}}" height="100px" width="100%" style="object-fit: contain;" >
+            <div>
+              {{film.titre}}
+            </div>
+            <div>{{categorie[film.titre]}}  </div>
+            <div><span class="ms-1 ps-1 pe-2   {% if publics[loop.index -1] == "Grand public" %} bg-warning {% else %} bg-danger  {% endif %} float-left" style="color:whitesmoke;" >{{ publics[loop.index -1] }} </span></div>
+          </div>
+
+
+        </th>
+                 {% if diff["Mardi"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Mardi"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Mardi"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Mardi"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Mardi"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Mardi"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Mardi"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+        </td>
+        {% endif %}
+        {% if diff["Mercredi"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Mercredi"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Mercredi"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Mercredi"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Mercredi"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Mercredi"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Mercredi"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+          
+          
+          
+        </td>
+        {% endif %}
+        {% if diff["Jeudi"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Jeudi"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Jeudi"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Jeudi"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Jeudi"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Jeudi"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Jeudi"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+          
+          
+        </td>
+        {% endif %}
+          
+         {% if diff["Vendredi"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Vendredi"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Vendredi"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Vendredi"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Vendredi"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Vendredi"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Vendredi"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+          
+          
+          
+        </td>
+        {% endif %}
+         {% if diff["Samedi"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Samedi"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Samedi"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Samedi"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Samedi"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Samedi"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Samedi"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+          
+          
+          
+        </td>
+        {% endif %}
+
+                 {% if diff["Dimanche"][film.titre] == false %}
+        <td></td>
+        {% else %}
+        <td>
+
+          <div class="d-flex align-items-center flex-column">
+            <div class="d-flex justify-content-between">
+              <div class="bg-warning ps-2 pe-2 me-2">{{diff["Dimanche"][film.titre]["Status"] }} </div>
+             <a href="{{path_for("agenda.slug.diffusion",{'diffusion':diff["Dimanche"][film.titre]["slug_diffusion"],'slugCinema':cinema.slug_cinema })}}"><img src="\crayon.svg" class="edit" width="20px" height="20px" ></a>
+            </div>
+            <div class="mt-2 font-weight-bold" style="font-weight: 200px;font-size: 20px;">{{diff["Dimanche"][film.titre]["Debut"] }}</div>
+            
+            <div class="mt-2">
+              {{salle["Dimanche"][film.titre] }}
+              <span class="mt-2" style="color: rgba(100, 220, 208, 0.808); font-size: 20px;"> {{diff["Dimanche"][film.titre]["langue"] }}</span>
+              <span style="color: rgba(100, 220, 208, 0.808); font-size: 20px;">{{diff["Dimanche"][film.titre]["Qualite"] }}</span>
+             </div>
+            <div class="mt-2">Durrée <span class="ms-1 ps-1 pe-2  float-left"  >{{film.durre}}</span></div>
+
+          </div>
+          
+          
+          
+          
+        </td>
+        {% endif %}
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
