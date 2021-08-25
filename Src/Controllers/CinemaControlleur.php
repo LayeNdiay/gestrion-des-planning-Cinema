@@ -24,7 +24,7 @@ class CinemaControlleur extends Controller
         }
         public function verfieId(ResponseInterface $response ,RequestInterface $request)
         {
-          $slug = $request->getAttribute("slugCinema");
+          $slug = $request->getAttribute("slugCinema"); 
           $isIdValid = false;
 
           $query= $this->pdo->query("SELECT * FROM cine_cinema");

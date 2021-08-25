@@ -17,7 +17,8 @@ require_once $public.DIRECTORY_SEPARATOR."Src".DIRECTORY_SEPARATOR. 'container.p
 
 $app->add( new \App\Middleware\Flashmiddlewra( $container->view->getEnvironment() ) );
 $app->add( new \App\Middleware\OldMidleware( $container->view->getEnvironment() ) );
-
+$app->get("/current-week", \App\Controllers\Api::class . ':getCurentPlanning' )->setName("curent planning");
+$app->get("/current-week/{cinema}", \App\Controllers\Api::class . ':getCurentPlanningOfCinema' )->setName("curent planning");
 $app->get("/ajout-film", \App\Controllers\PageController::class . ':home' )->setName("addFilm");
 $app->post("/ajout-film", \App\Controllers\PageController::class . ':postCinema' )->setName("addFilm");
 $app->get("/voire-films", \App\Controllers\ViewController::class . ':viewMovies' )->setName("viewFilm");

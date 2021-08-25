@@ -69,7 +69,7 @@ class  Controller
             $queryMovie->execute([
                "slug"=>$slug
             ]);
-             $result = $queryMovie->fetchAll(PDO::FETCH_ASSOC);
+             $result = $queryMovie->fetchAll(PDO::FETCH_ASSOC); 
 
             if (empty($result) || $result===NULL) {
                 $this->render($response,"Page". DIRECTORY_SEPARATOR. "noresult.twig");
