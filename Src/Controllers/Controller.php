@@ -64,16 +64,42 @@ class  Controller
 
          public function idMovie($slug,ResponseInterface $response)
          {
-            $queryMovie= $this->pdo->query("SELECT * FROM cine_movie where slug_movie ='".$slug."'");
-            if ($queryMovie===false) {
+            $queryMovie= $this->pdo->prepare("SELECT * FROM cine_movie where slug_movie =:slug");
+            
+            $queryMovie->execute([
+               "slug"=>$slug
+            ]);
+             $result = $queryMovie->fetchAll(PDO::FETCH_ASSOC);
+
+            if (empty($result) || $result===NULL) {
                 $this->render($response,"Page". DIRECTORY_SEPARATOR. "noresult.twig");
+                return false;
             }
             else {
-               $result = $queryMovie->fetchAll(PDO::FETCH_ASSOC);
+              
                $resMovie = $result[0];
                return $resMovie["id_movie"];
             }
          
+         }
+         public function idCinema($slug,ResponseInterface $response)
+         {
+            $queryCinema= $this->pdo->prepare("SELECT * FROM cine_cinema where slug_cinema =:slug");
+            
+            $queryCinema->execute([
+               "slug"=>$slug
+            ]);
+            $result = $queryCinema->fetchAll(PDO::FETCH_ASSOC);
+            if (empty($result ) || $result===NULL) {
+             $this->render($response,"Page". DIRECTORY_SEPARATOR. "noresult.twig");
+             return false;
+            }
+            else{
+             $resMovie = $result[0];
+             return $resMovie["id_cinema"];
+            }
+ 
+           
          }
          public function idSalle($slug,ResponseInterface $response)
          {
@@ -93,6 +119,7 @@ class  Controller
             $querydiffusion= $this->pdo->query("SELECT * FROM cine_diffusion where slug_diffusion ='".$slug."'");
             if ($querydiffusion === false) {
                $this->render($response,"Page". DIRECTORY_SEPARATOR. "noresult.twig");
+               return false;
             }
             else {
                $result = $querydiffusion->fetchAll(PDO::FETCH_ASSOC);

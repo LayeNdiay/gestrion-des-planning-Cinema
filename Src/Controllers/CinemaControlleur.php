@@ -39,24 +39,7 @@ class CinemaControlleur extends Controller
             return $isIdValid;
         }
 
-        public function idCinema($slug,ResponseInterface $response)
-        {
-           $queryCinema= $this->pdo->query("SELECT * FROM cine_cinema where slug_cinema ='".$slug."'");
-           
-           if ($queryCinema===false) {
-            return $this->render($response,"Page". DIRECTORY_SEPARATOR. "noresult.twig");
-            
-           }
-           else{
-            $result = $queryCinema->fetchAll(PDO::FETCH_ASSOC);
-           
-            $resMovie = $result[0];
-            return $resMovie["id_cinema"];
-
-           }
-
-          
-        }
+      
 
         public function chooseCinema( RequestInterface $request,ResponseInterface $response)  
           {
@@ -74,6 +57,7 @@ class CinemaControlleur extends Controller
 
           public function planning( RequestInterface $request,ResponseInterface $response)  
           {
+            
             $id = $this->idCinema($request->getAttribute("slugCinema"),$response);  
            if($this->verfieId($response,$request)=== false)
              {
@@ -181,7 +165,7 @@ class CinemaControlleur extends Controller
 
             $requetteCategorie = $this->pdo->prepare("SELECT * FROM cine_categorie WHERE id_movie = :idCategorie");
             $requetteFilm = $this->pdo->prepare("SELECT * FROM cine_movie WHERE id_movie = :idFilm ");
-            $requetteSalle = $this->pdo->prepare("SELECT * FROM cine_salle WHERE id_salle = :idSalle AND id_cinema= :idCinema");
+            $requetteSalle = $this->pdo->prepare("SELECT * FROM cine_salle WHERE id_salle = :idSalle AND id_cinema = :idCinema");
 
             $films =[];
             $categorie =[];
